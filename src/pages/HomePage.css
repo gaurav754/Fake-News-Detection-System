@@ -3,17 +3,31 @@
 }
 
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 5rem 5%;
-  gap: 3rem;
   color: white;
   min-height: 80vh;
+  overflow: hidden;
+}
+
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 40%, black 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 40%, black 100%);
+  opacity: 0.9;
 }
 
 .hero-content {
-  flex: 1;
+  position: relative;
+  z-index: 1;
   max-width: 600px;
 }
 
@@ -102,28 +116,7 @@
 }
 
 .hero-visual {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.visual-card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  padding: 0;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  width: fit-content;
-  max-width: 500px;
-}
-
-.hero-image {
-  width: 100%;
-  height: auto;
-  display: block;
+  display: none;
 }
 
 .visual-icon {

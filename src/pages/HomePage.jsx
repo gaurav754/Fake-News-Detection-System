@@ -9,6 +9,7 @@ function HomePage() {
   return (
     <div className="homepage">
       <section className="hero">
+        <img src={heroImage} alt="" className="hero-bg-image" />
         <div className="hero-content">
           <h1>
             Verify News with <span className="hero-highlight">Confidence</span>
@@ -39,12 +40,6 @@ function HomePage() {
               <h3>100+</h3>
               <p>Active Users</p>
             </div>
-          </div>
-        </div>
-        
-        <div className="hero-visual">
-          <div className="visual-card">
-            <img src={heroImage} alt="News Detection" className="hero-image" />
           </div>
         </div>
       </section>
