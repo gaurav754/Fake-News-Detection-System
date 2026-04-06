@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="logo">Fake News Detection</div>
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
-        <li><a href="#about">About</a></li>
+        <li><Link to="/about">About</Link></li>
         <li><a href="#contact">Contact</a></li>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup" className="signup-btn">Sign Up</Link></li>
