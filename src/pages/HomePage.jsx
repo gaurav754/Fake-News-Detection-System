@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import './HomePage.css'
 import heroImage from '../assets/image.png'
 import target from '../assets/target.png'
@@ -5,6 +6,7 @@ import result from '../assets/results.png'
 import community from '../assets/community.png'
 
 function HomePage() {
+  const navigate = useNavigate()
 
   return (
     <div className="homepage">
@@ -19,7 +21,7 @@ function HomePage() {
           </p>
           
           <div className="hero-buttons">
-            <button className="btn-hero btn-hero-primary" onClick={() => document.getElementById('analyzer').scrollIntoView({ behavior: 'smooth' })}>
+            <button className="btn-hero btn-hero-primary" onClick={() => navigate('/signup')}>
               Get Started
             </button>
             <button className="btn-hero btn-hero-secondary" onClick={() => document.getElementById('features').scrollIntoView({ behavior: 'smooth' })}>
@@ -99,7 +101,7 @@ function HomePage() {
             <h2>Ready to Fight Misinformation?</h2>
             <p>Join thousands of users who trust our platform for news verification. Start protecting yourself from fake news today with AI-powered detection.</p>
             <div className="cta-buttons">
-              <button className="btn-hero btn-hero-primary">
+              <button className="btn-hero btn-hero-primary" onClick={() => navigate('/signup')}>
                 Get Started Now
               </button>
             </div>
