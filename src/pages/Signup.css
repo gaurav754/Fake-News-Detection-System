@@ -1,0 +1,339 @@
+/* ── Page ── */
+.su-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+/* ── Card ── */
+.su-card {
+  width: 100%;
+  max-width: 780px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 28px;
+  padding: 2.8rem 3rem;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Header ── */
+.su-header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.su-logo {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+}
+
+.su-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.02em;
+}
+
+.su-header p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Avatar ── */
+.su-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.su-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.su-avatar:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+}
+
+.su-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.su-avatar-placeholder {
+  text-align: center;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.su-avatar-placeholder small {
+  font-size: 0.65rem;
+  display: block;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Form ── */
+.su-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.su-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.su-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.su-full {
+  grid-column: 1 / -1;
+}
+
+/* ── Label ── */
+.su-field label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+
+.su-optional {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Input ── */
+.su-field input {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1.15rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #1a1a2e;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+  box-sizing: border-box;
+}
+
+.su-field input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.su-field input:focus {
+  border-color: #667eea;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+/* ── Password Wrap ── */
+.su-pass-wrap {
+  position: relative;
+}
+
+.su-pass-wrap input {
+  padding-right: 3rem;
+}
+
+.su-eye {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── Strength ── */
+.su-strength {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.su-strength-bar {
+  height: 5px;
+  border-radius: 10px;
+  flex: 1;
+  transition: background 0.3s, width 0.3s;
+}
+
+.su-strength-bar.su-weak    { background: #ef4444; width: 33%; }
+.su-strength-bar.su-medium  { background: #f59e0b; width: 66%; }
+.su-strength-bar.su-strong  { background: #22c55e; width: 100%; }
+
+.su-strength-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.su-strength-label.su-weak   { color: #fca5a5; }
+.su-strength-label.su-medium { color: #fcd34d; }
+.su-strength-label.su-strong { color: #86efac; }
+
+/* ── Error / Match ── */
+.su-error {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  font-weight: 600;
+}
+
+.su-match {
+  font-size: 0.8rem;
+  color: #86efac;
+  font-weight: 600;
+}
+
+/* ── Submit Button ── */
+.su-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: transform 0.25s, box-shadow 0.25s;
+  margin-top: 0.4rem;
+}
+
+.su-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+}
+
+/* ── Divider ── */
+.su-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
+}
+
+.su-divider::before,
+.su-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Social ── */
+.su-social {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.su-social-btn {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  font-family: inherit;
+}
+
+.su-social-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Login Link ── */
+.su-login {
+  text-align: center;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.su-login a {
+  color: #a8edea;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.su-login a:hover {
+  text-decoration: underline;
+}
+
+/* ── Success ── */
+.su-success {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 28px;
+  padding: 4rem 3rem;
+  color: white;
+}
+
+.su-success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.su-success h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.su-success p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .su-card {
+    padding: 2rem 1.5rem;
+  }
+  .su-row,
+  .su-social {
+    grid-template-columns: 1fr;
+  }
+  .su-header h2 {
+    font-size: 1.7rem;
+  }
+}

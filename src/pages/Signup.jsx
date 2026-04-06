@@ -1,81 +1,164 @@
 import { useState } from 'react'
-import './Auth.css'
+import { Link, useNavigate } from 'react-router-dom'
+import './Signup.css'
 
-function Signup() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+function getStrength(password) {
+  if (password.length === 0) return null
+  if (password.length < 6) return 'weak'
+  if (password.length < 10 || !/[0-9]/.test(password) || !/[^a-zA-Z0-9]/.test(password)) return 'medium'
+  return 'strong'
+}
+
+export default function Signup() {
+  const navigate = useNavigate()
+  const [form, setForm] = useState({
+    name: '', username: '', email: '', phone: '',
+    password: '', confirm: '', address: '',
+  })
+  const [showPass, setShowPass] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [success, setSuccess] = useState(false)
+  const [avatar, setAvatar] = useState(null)
+
+  const strength = getStrength(form.password)
+
+  const validate = () => {
+    const e = {}
+    if (!form.name.trim()) e.name = 'Full name is required'
+    if (!form.username.trim()) e.username = 'Username is required'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email'
+    if (form.password.length < 6) e.password = 'Password must be at least 6 characters'
+    if (form.password !== form.confirm) e.confirm = 'Passwords do not match'
+    if (!form.address.trim()) e.address = 'Address is required'
+    return e
+  }
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+    setErrors({ ...errors, [e.target.name]: '' })
+  }
+
+  const handleAvatar = (e) => {
+    const file = e.target.files[0]
+    if (file) setAvatar(URL.createObjectURL(file))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (password !== confirmPassword) {
-      alert('Passwords do not match')
-      return
-    }
-    console.log('Signup:', { name, email, password })
+    const e2 = validate()
+    if (Object.keys(e2).length) { setErrors(e2); return }
+    setSuccess(true)
+    setTimeout(() => navigate('/login'), 2500)
   }
 
+  if (success) return (
+    <div className="su-page">
+      <div className="su-success">
+        <div className="su-success-icon">🎉</div>
+        <h2>Account Created!</h2>
+        <p>Welcome aboard. Redirecting to login...</p>
+      </div>
+    </div>
+  )
+
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2>Create Account</h2>
-        <p className="auth-subtitle">Join us in fighting misinformation</p>
-        
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
-              required
-            />
+    <div className="su-page">
+      <div className="su-card">
+
+        {/* Header */}
+        <div className="su-header">
+          <div className="su-logo">🛡️</div>
+          <h2>Create Account</h2>
+          <p>Join us in fighting misinformation</p>
+        </div>
+
+
+
+        <form onSubmit={handleSubmit} className="su-form" noValidate>
+
+          {/* Row 1 */}
+          <div className="su-row">
+            <div className="su-field">
+              <label>👤 Full Name</label>
+              <input name="name" value={form.name} onChange={handleChange} placeholder="John Doe" />
+              {errors.name && <span className="su-error">{errors.name}</span>}
+            </div>
+            <div className="su-field">
+              <label>🔖 Username</label>
+              <input name="username" value={form.username} onChange={handleChange} placeholder="johndoe99" />
+              {errors.username && <span className="su-error">{errors.username}</span>}
+            </div>
           </div>
-          
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
+
+          {/* Row 2 */}
+          <div className="su-row">
+            <div className="su-field">
+              <label>📧 Email Address</label>
+              <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />
+              {errors.email && <span className="su-error">{errors.email}</span>}
+            </div>
+            <div className="su-field">
+              <label>📞 Phone <span className="su-optional">(optional)</span></label>
+              <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" />
+            </div>
           </div>
-          
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Create a password"
-              required
-            />
+
+          {/* Password */}
+          <div className="su-row">
+            <div className="su-field">
+              <label>🔒 Password</label>
+              <div className="su-pass-wrap">
+                <input
+                  name="password" type={showPass ? 'text' : 'password'}
+                  value={form.password} onChange={handleChange} placeholder="Min. 6 characters"
+                />
+                <button type="button" className="su-eye" onClick={() => setShowPass(!showPass)}>
+                  {showPass ? '🙈' : '👁️'}
+                </button>
+              </div>
+              {form.password && (
+                <div className="su-strength">
+                  <div className={`su-strength-bar su-${strength}`} />
+                  <span className={`su-strength-label su-${strength}`}>
+                    {strength === 'weak' ? '⚠️ Weak' : strength === 'medium' ? '🟡 Medium' : '✅ Strong'}
+                  </span>
+                </div>
+              )}
+              {errors.password && <span className="su-error">{errors.password}</span>}
+            </div>
+            <div className="su-field">
+              <label>🔐 Confirm Password</label>
+              <div className="su-pass-wrap">
+                <input
+                  name="confirm" type={showConfirm ? 'text' : 'password'}
+                  value={form.confirm} onChange={handleChange} placeholder="Re-enter password"
+                />
+                <button type="button" className="su-eye" onClick={() => setShowConfirm(!showConfirm)}>
+                  {showConfirm ? '🙈' : '👁️'}
+                </button>
+              </div>
+              {form.confirm && form.password !== form.confirm &&
+                <span className="su-error">❌ Passwords don't match</span>}
+              {form.confirm && form.password === form.confirm && form.confirm.length > 0 &&
+                <span className="su-match">✅ Passwords match</span>}
+              {errors.confirm && !form.confirm && <span className="su-error">{errors.confirm}</span>}
+            </div>
           </div>
-          
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm your password"
-              required
-            />
+
+          {/* Address */}
+          <div className="su-field su-full">
+            <label>🏠 Address</label>
+            <input name="address" value={form.address} onChange={handleChange} placeholder="123 Street, City, State" />
+            {errors.address && <span className="su-error">{errors.address}</span>}
           </div>
-          
-          <button type="submit" className="auth-btn">Sign Up</button>
+
+          {/* Submit */}
+          <button type="submit" className="su-btn">🚀 Create Account</button>
+
+          <p className="su-login">Already have an account? <Link to="/login">Login</Link></p>
         </form>
-        
-        <p className="auth-footer">
-          Already have an account? <a href="/login">Login</a>
-        </p>
       </div>
     </div>
   )
 }
-
-export default Signup

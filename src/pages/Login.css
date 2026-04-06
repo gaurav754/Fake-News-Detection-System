@@ -1,0 +1,20 @@
+.login-card {
+  max-width: 480px;
+}
+
+.login-forgot {
+  text-align: right;
+  margin-top: -0.4rem;
+}
+
+.login-forgot a {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.login-forgot a:hover {
+  color: #a8edea;
+}
