@@ -35,7 +35,7 @@
 
 .form-group label {
   display: block;
-  color: #333;
+  color: #333 !important;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
@@ -47,6 +47,12 @@
   border-radius: 10px;
   font-size: 1rem;
   transition: border-color 0.3s;
+  color: #333 !important;
+  background: #fff !important;
+}
+
+.form-group input::placeholder {
+  color: #aaa !important;
 }
 
 .form-group input:focus {
