@@ -44,12 +44,23 @@ export default function Signup() {
     if (file) setAvatar(URL.createObjectURL(file))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const e2 = validate()
     if (Object.keys(e2).length) { setErrors(e2); return }
-    setSuccess(true)
-    setTimeout(() => navigate('/login'), 2500)
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json()
+      if (!res.ok) { setErrors({ email: data.message }); return }
+      setSuccess(true)
+      setTimeout(() => navigate('/login'), 2000)
+    } catch {
+      setErrors({ email: 'Server error. Try again.' })
+    }
   }
 
   if (success) return (

@@ -18,12 +18,25 @@ export default function Login() {
     return e
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const e2 = validate()
     if (Object.keys(e2).length) { setErrors(e2); return }
-    setSuccess(true)
-    setTimeout(() => navigate('/'), 2000)
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
+      const data = await res.json()
+      if (!res.ok) { setErrors({ email: data.message }); return }
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      setSuccess(true)
+      setTimeout(() => navigate('/dashboard'), 1500)
+    } catch {
+      setErrors({ email: 'Server error. Try again.' })
+    }
   }
 
   if (success) return (
@@ -31,7 +44,7 @@ export default function Login() {
       <div className="su-success">
         <div className="su-success-icon">✅</div>
         <h2>Welcome Back!</h2>
-        <p>Login successful. Redirecting...</p>
+        <p>Login successful. Redirecting to dashboard...</p>
       </div>
     </div>
   )
