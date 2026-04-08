@@ -7,6 +7,8 @@ const API = 'http://localhost:5000/api/community'
 export default function Community() {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
+  const userId = user.id
   const [posts, setPosts] = useState([])
   const [form, setForm] = useState({ title: '', description: '', source: '' })
   const [errors, setErrors] = useState({})
@@ -56,6 +58,7 @@ export default function Community() {
       method: 'PATCH',
       headers: { Authorization: `Bearer ${token}` },
     })
+    if (res.status === 400) return
     const updated = await res.json()
     setPosts(posts.map(p => p._id === id ? updated : p))
   }
@@ -149,7 +152,12 @@ export default function Community() {
               )}
               <div className="comm-post-footer">
                 <span className="comm-author">👤 {post.postedBy}</span>
-                <button className="comm-upvote" onClick={() => handleUpvote(post._id)}>
+                <button
+                  className={`comm-upvote ${post.upvotedBy?.includes(userId) ? 'upvoted' : ''}`}
+                  onClick={() => handleUpvote(post._id)}
+                  disabled={post.upvotedBy?.includes(userId)}
+                  title={post.upvotedBy?.includes(userId) ? 'Already upvoted' : 'Upvote'}
+                >
                   👍 {post.upvotes}
                 </button>
               </div>

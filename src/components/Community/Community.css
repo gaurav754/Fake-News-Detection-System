@@ -224,6 +224,13 @@
 
 .comm-upvote:hover { background: #667eea; color: white; }
 
+.comm-upvote.upvoted {
+  background: #667eea;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
 @media (max-width: 768px) {
   .comm-header { flex-direction: column; align-items: flex-start; }
 }
