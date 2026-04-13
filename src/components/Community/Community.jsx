@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Community.css'
 
-const API = 'http://localhost:5000/api/community'
+const API = 'https://fake-news-detection-system-backend-qyyf.onrender.com/api/community'
 
 export default function Community() {
   const navigate = useNavigate()

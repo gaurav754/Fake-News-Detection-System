@@ -23,7 +23,7 @@ export default function Login() {
     const e2 = validate()
     if (Object.keys(e2).length) { setErrors(e2); return }
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch('https://fake-news-detection-system-backend-qyyf.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
