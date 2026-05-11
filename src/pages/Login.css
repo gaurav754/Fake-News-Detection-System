@@ -18,3 +18,8 @@
 .login-forgot a:hover {
   color: #a8edea;
 }
+
+.su-btn:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Community.css'
 
-const API = 'https://fake-news-detection-system-backend-qyyf.onrender.com/api/community'
+const API = 'http://localhost:5000/api/community'
 
 export default function Community() {
   const navigate = useNavigate()
@@ -55,6 +55,17 @@ export default function Community() {
   const handleUpvote = async (id) => {
     if (!token) { navigate('/login'); return }
     const res = await fetch(`${API}/${id}/upvote`, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (res.status === 400) return
+    const updated = await res.json()
+    setPosts(posts.map(p => p._id === id ? updated : p))
+  }
+
+  const handleDownvote = async (id) => {
+    if (!token) { navigate('/login'); return }
+    const res = await fetch(`${API}/${id}/downvote`, {
       method: 'PATCH',
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -152,14 +163,24 @@ export default function Community() {
               )}
               <div className="comm-post-footer">
                 <span className="comm-author">👤 {post.postedBy}</span>
-                <button
-                  className={`comm-upvote ${post.upvotedBy?.includes(userId) ? 'upvoted' : ''}`}
-                  onClick={() => handleUpvote(post._id)}
-                  disabled={post.upvotedBy?.includes(userId)}
-                  title={post.upvotedBy?.includes(userId) ? 'Already upvoted' : 'Upvote'}
-                >
-                  👍 {post.upvotes}
-                </button>
+                <div className="comm-votes">
+                  <button
+                    className={`comm-upvote ${post.upvotedBy?.includes(userId) ? 'upvoted' : ''}`}
+                    onClick={() => handleUpvote(post._id)}
+                    disabled={post.upvotedBy?.includes(userId)}
+                    title={post.upvotedBy?.includes(userId) ? 'Already upvoted' : 'Upvote'}
+                  >
+                    👍 {post.upvotes}
+                  </button>
+                  <button
+                    className={`comm-downvote ${post.downvotedBy?.includes(userId) ? 'downvoted' : ''}`}
+                    onClick={() => handleDownvote(post._id)}
+                    disabled={post.downvotedBy?.includes(userId)}
+                    title={post.downvotedBy?.includes(userId) ? 'Already downvoted' : 'Downvote'}
+                  >
+                    👎 {post.downvotes || 0}
+                  </button>
+                </div>
               </div>
             </div>
           ))

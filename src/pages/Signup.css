@@ -229,13 +229,18 @@
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.02em;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.15s, box-shadow 0.15s;
   margin-top: 0.4rem;
 }
 
 .su-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+}
+
+.su-btn:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 /* ── Divider ── */

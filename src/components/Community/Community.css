@@ -231,6 +231,32 @@
   opacity: 0.75;
 }
 
+.comm-downvote {
+  background: #fff0f0;
+  border: none;
+  color: #e74c3c;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: background 0.2s;
+}
+
+.comm-downvote:hover { background: #e74c3c; color: white; }
+
+.comm-downvote.downvoted {
+  background: #e74c3c;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.comm-votes {
+  display: flex;
+  gap: 0.6rem;
+}
+
 @media (max-width: 768px) {
   .comm-header { flex-direction: column; align-items: flex-start; }
 }

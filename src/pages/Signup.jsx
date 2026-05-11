@@ -49,7 +49,7 @@ export default function Signup() {
     const e2 = validate()
     if (Object.keys(e2).length) { setErrors(e2); return }
     try {
-      const res = await fetch('https://fake-news-detection-system-backend-qyyf.onrender.com/api/auth/signup', {
+      const res = await fetch('http://localhost:5000/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -91,12 +91,12 @@ export default function Signup() {
           {/* Row 1 */}
           <div className="su-row">
             <div className="su-field">
-              <label>👤 Full Name</label>
+              <label>Full Name</label>
               <input name="name" value={form.name} onChange={handleChange} placeholder="John Doe" />
               {errors.name && <span className="su-error">{errors.name}</span>}
             </div>
             <div className="su-field">
-              <label>🔖 Username</label>
+              <label>Username</label>
               <input name="username" value={form.username} onChange={handleChange} placeholder="johndoe99" />
               {errors.username && <span className="su-error">{errors.username}</span>}
             </div>
@@ -105,12 +105,12 @@ export default function Signup() {
           {/* Row 2 */}
           <div className="su-row">
             <div className="su-field">
-              <label>📧 Email Address</label>
+              <label>Email Address</label>
               <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />
               {errors.email && <span className="su-error">{errors.email}</span>}
             </div>
             <div className="su-field">
-              <label>📞 Phone <span className="su-optional">(optional)</span></label>
+              <label>Phone <span className="su-optional">(optional)</span></label>
               <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" />
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function Signup() {
           {/* Password */}
           <div className="su-row">
             <div className="su-field">
-              <label>🔒 Password</label>
+              <label>Password</label>
               <div className="su-pass-wrap">
                 <input
                   name="password" type={showPass ? 'text' : 'password'}
@@ -139,7 +139,7 @@ export default function Signup() {
               {errors.password && <span className="su-error">{errors.password}</span>}
             </div>
             <div className="su-field">
-              <label>🔐 Confirm Password</label>
+              <label>Confirm Password</label>
               <div className="su-pass-wrap">
                 <input
                   name="confirm" type={showConfirm ? 'text' : 'password'}
@@ -159,13 +159,13 @@ export default function Signup() {
 
           {/* Address */}
           <div className="su-field su-full">
-            <label>🏠 Address</label>
+            <label>Address</label>
             <input name="address" value={form.address} onChange={handleChange} placeholder="123 Street, City, State" />
             {errors.address && <span className="su-error">{errors.address}</span>}
           </div>
 
           {/* Submit */}
-          <button type="submit" className="su-btn">🚀 Create Account</button>
+          <button type="submit" className="su-btn">Create Account</button>
 
           <p className="su-login">Already have an account? <Link to="/login">Login</Link></p>
         </form>
